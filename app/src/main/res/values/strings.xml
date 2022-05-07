@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LetRoll</string>
+    <string name="app_name">LetsRoll</string>
     <string name="tab_text_1">История</string>
     <string name="tab_text_2">Кубы</string>
 </resources>

@@ -14,7 +14,6 @@ public class Dice {
     //Очищаем результат предыдущего броска
     private void refreshResult(String input) {
         result = 0;
-//        throwing="Request:"+'\n'+input+'\n';
     }
 
     //в результате получаем лист кубов и модификаторов
@@ -77,7 +76,7 @@ public class Dice {
                 throwing += "d" + sides + " = " + roll + '\n';//Записываем для каждого броска результат
             }
         }
-        throwing += "Результат= " + result + '\n' + '\n';
+        throwing += "Результат = " + result + '\n' + '\n';
     }
 
     //Выводим результат

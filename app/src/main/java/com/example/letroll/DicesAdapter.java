@@ -16,9 +16,6 @@ import java.util.List;
 
 public class DicesAdapter extends RecyclerView.Adapter<DicesAdapter.DiceViewHolder> {
 
-//    private int numberItems;
-//    private static int viewHolderCount;
-
     private final LayoutInflater inflater;
     private final List<DiceItem> diceItems;
     private final Context context;
@@ -33,19 +30,6 @@ public class DicesAdapter extends RecyclerView.Adapter<DicesAdapter.DiceViewHold
     @Override
     public DiceViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.dice_item, parent, false);
-//        DiceViewHolder holder = new DiceViewHolder(view, new ClickListener() {
-//
-//            @Override
-//            public void countSum(int p) {
-//                MainActivity.DiceItem diceItem = diceItems.get(p);
-//                int newCount = diceItem.getCount();
-//                newCount++;
-//                diceItem.setCount(newCount);
-//                System.out.println(diceItem.getCount());
-//            }
-//        });
-//        holder.countView.setText("1111");
-
         return new DiceViewHolder(view);
     }
 
@@ -87,7 +71,6 @@ public class DicesAdapter extends RecyclerView.Adapter<DicesAdapter.DiceViewHold
         final TextView countView;
         final Button plusBtn;
         final Button minusBtn;
-//        ClickListener listener;
 
         public DiceViewHolder(View view) {
             super(view);
@@ -95,70 +78,7 @@ public class DicesAdapter extends RecyclerView.Adapter<DicesAdapter.DiceViewHold
             countView = view.findViewById(R.id.rv_dice_item_counter);
             plusBtn = view.findViewById(R.id.rv_dice_item_btn_plus);
             minusBtn = view.findViewById(R.id.rv_dice_item_btn_minus);
-
-//            this.listener = listener;
-//            plusBtn.setOnClickListener(this);
-
         }
-
-//        public void onClick(View view) {
-//            switch (view.getId()) {
-//                case R.id.rv_dice_item_btn_plus:
-//                    listener.countSum(this.getLayoutPosition());
-//                    break;
-//                default:
-//                    break;
-//            }
-//        }
-
-
     }
-
-//    public interface ClickListener {
-//        void countSum(int p);
-//    }
-//    @NonNull
-//    @Override
-//    public DiceViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-//        Context context = parent.getContext();
-//        int layoutIdListItem = R.layout.dice_item;
-//
-//        LayoutInflater inflater = LayoutInflater.from(context);
-//
-//        View view = inflater.inflate(layoutIdListItem, parent, false);
-//
-//        DiceViewHolder viewHolder = new DiceViewHolder(view);
-//        viewHolder.viewHolderIndex.setText(viewHolderCount);
-//        viewHolderCount++;
-//
-//        return viewHolder;
-//    }
-//
-//    @Override
-//    public void onBindViewHolder(@NonNull DiceViewHolder holder, int position) {
-//        holder.bind(position);
-//    }
-//
-//    @Override
-//    public int getItemCount() {
-//        return numberItems;
-//    }
-//
-//    class DiceViewHolder extends RecyclerView.ViewHolder {
-//
-//        TextView listItemDiceView;
-//        TextView viewHolderIndex;
-//
-//        public DiceViewHolder(@NonNull View itemView) {
-//            super(itemView);
-//
-//            listItemDiceView = itemView.findViewById(R.id.rv_dice_item_counter);
-//            viewHolderIndex = itemView.findViewById(R.id.rv_dice_item_name);//потом удалить, это поле не нужно...наверное
-//        }
-//
-//        void bind(int listIndex) {
-//            listItemDiceView.setText(String.valueOf(listIndex));
-//        }
-//    }
 
 }

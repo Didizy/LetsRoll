@@ -41,6 +41,5 @@ public class Fragment2 extends Fragment {
         dices.add(new DiceItem("d00", 0));
     }
 
-
 }
 
