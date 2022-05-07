@@ -1,35 +1,31 @@
 package com.example.letroll;
 
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.tabs.TabLayout;
-
-import androidx.viewpager.widget.ViewPager;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.util.HashSet;
-import java.util.Set;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-
-import com.example.letroll.ui.main.SectionsPagerAdapter;
 import com.example.letroll.databinding.ActivityMainBinding;
+import com.example.letroll.databinding.Fragment1LayoutBinding;
+import com.example.letroll.databinding.Fragment2LayoutBinding;
+import com.example.letroll.ui.main.SectionsPagerAdapter;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.tabs.TabLayout;
+
+import java.util.ArrayList;
+import java.util.HashSet;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+
     private RecyclerView dicesList;
     private DicesAdapter dicesAdapter;
 
@@ -37,58 +33,32 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        dicesList=findViewById(R.id.rv_dice);
-
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this    );
-        dicesList.setLayoutManager(layoutManager);
-
-        dicesAdapter=new DicesAdapter(10);
-        dicesList.setAdapter(dicesAdapter);
-
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         ViewPager viewPager = binding.viewPager;
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = binding.tabs;
         tabs.setupWithViewPager(viewPager);
-        FloatingActionButton fab = binding.fab;
-
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
-
     }
 
-    public void addDices(View view) {
-
-    }
-
-    public void decreaseDices(View view) {
-
-    }
-
-    public String insertDice(String insert) {
+    public String insertDice() {
         String correct = null;
-        if ((char) insert.charAt(0) == '-') {
-            correct = insert;
-        } else if ((char) insert.charAt(0) == '0')
-            correct = null;
-        else
-            correct = '+' + insert;
+
+        for (int i = 0; i < Fragment2.dices.size(); i++) {
+            correct += "+" + String.valueOf(Fragment2.dices.get(i).getCount()) + Fragment2.dices.get(i).getName();
+        }
+        TextView res_mod = findViewById(R.id.modifications_count);
+        if (res_mod.getText() != "Модификатор") {
+            correct += "-" + String.valueOf(res_mod.getText());
+        }
 
         return correct;
     }
 
     public void makeRoll(View view) {
         Dice dice = new Dice();
-        String request = "+4d12+2-3-6d6+12+2d8-2";
+        String request = insertDice();
         HashSet<EditText> dices = new HashSet<EditText>();
 
         dice.doTheDiceRoll(request);
@@ -96,5 +66,28 @@ public class MainActivity extends AppCompatActivity {
 
         TextView res_view = findViewById(R.id.res_view);
         res_view.setText(result);
+    }
+
+    public void clearHistory(View view) {
+        TextView res_view = findViewById(R.id.res_view);
+        res_view.setText("История пуста");
+    }
+
+    public int sum = 0;
+
+    public void modificatorCountPlus(View view) {
+        TextView res_mod = findViewById(R.id.modifications_count);
+        sum++;
+        System.out.println(sum);
+        res_mod.setText(String.valueOf(sum));
+    }
+
+    public void modificatorCountMinus(View view) {
+        TextView res_mod = findViewById(R.id.modifications_count);
+        if (sum > 0) {
+            sum--;
+        }
+        System.out.println(sum);
+        res_mod.setText(String.valueOf(sum));
     }
 }
